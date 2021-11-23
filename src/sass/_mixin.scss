@@ -1,0 +1,61 @@
+@mixin --box-sizing ($property) {
+    -webkit-box-sizing: $property;
+       -moz-box-sizing: $property;
+            box-sizing: $property;
+}
+@mixin --flex () {
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+}
+@mixin --flex-flow ($property) {
+    -webkit-flex-flow: $property;
+        -ms-flex-flow: $property;
+            flex-flow: $property; 
+}
+@mixin --box-shadow ($property) {
+    -webkit-box-shadow: $property;
+       -moz-box-shadow: $property;
+            box-shadow: $property;
+}
+@mixin --transform ($property) {
+    -webkit-transform: $property; /* Safari et Chrome */
+       -moz-transform: $property; /* Firefox */
+        -ms-transform: $property; /* Internet Explorer */
+         -o-transform: $property; /* Opera */
+            transform: $property;
+}
+
+
+/* Landscape phones and down */
+@mixin xs {
+    @media (max-width: 480px) {
+        @content;
+    }
+}
+/* Landscape phone to portait tablet */
+@mixin sm {
+    @media (max-width: 767px) {
+        @content;
+    }
+}
+/* Portrait table to landscape and desktop */
+@mixin md {
+    @media (min-width: 768px)  and (max-width: 979px) {
+        @content;
+    }
+}
+/* Large desktop */
+@mixin xl {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin ex {
+    @media (min-width: 48em) {
+        @content;
+    }
+}
