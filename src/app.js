@@ -10,8 +10,10 @@
     * - Author          : christian
     * - Modification    : 
 **/
-import { Input } from "postcss";
+//import { Input } from "postcss";
 import "./sass/app.scss";
+import { favicon } from "./favicon.ico";
+import { logo } from "./logo.png";
 
 const app       = document.querySelector('.app');
 const todoForm  = app.querySelector('form');
