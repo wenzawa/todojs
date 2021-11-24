@@ -19,8 +19,9 @@ const app       = document.querySelector('.app');
 const todoForm  = app.querySelector('form');
 const todoList  = app.querySelector('.todolist');
 const todoInput = document.querySelector('.app form > input');
+const todoTasks = app.querySelector('.todotasks');
 
-const todos = [
+let todos = [
     {
         titre: 'Faire du React',
         done: false,
@@ -50,6 +51,9 @@ const displayTodo = () => {
     });
     todoList.innerHTML= "";
     todoList.append(...nodes);
+    if (todos.length > 0) {
+        createTask();
+    }
 }
 const createTodo = (todo, index) => {
     const li = document.createElement('li');
@@ -124,7 +128,6 @@ const createEditTodo = (todo, index) => {
 
     return li; 
 } 
-
 const addTodo = titre => {
     if (titre) {
         todos.push({titre, done: false});
@@ -135,7 +138,6 @@ const deleteTodo = (index) => {
     todos.splice(index, 1);
     displayTodo();
 };
-
 const toggleTodo = index => { 
     todos[index].done = !todos[index].done;
     displayTodo();
@@ -150,4 +152,30 @@ const editTodo = (index , input) => {
     todos[index].editMode = false;
     displayTodo();
 };
+const createTask = () => {
+    let total = todos.length;
+    let num = todos.filter(todo => todo.done === true).length;
+
+    let tasksLeft = document.createElement("div");
+    tasksLeft.setAttribute("class", "tasks--left");
+    let span = document.createElement("span");
+    span.innerText = `${num} de(s) ${total} tâches effectuée(s)`;
+    tasksLeft.append(span);
+
+    let tasksRight = document.createElement("div");
+    tasksRight.setAttribute("class", "tasks--right");
+    let btn = document.createElement("button");
+    btn.innerText = "Supprimer de tâches cochées";
+    btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        removeTasks();
+    });
+    tasksRight.append(btn);
+    todoTasks.innerHTML = "";
+    todoTasks.append(tasksLeft, tasksRight);
+}
+const removeTasks = () => {
+    todos = todos.filter(todo => todo.done === false);
+    displayTodo();
+} 
 displayTodo(); 
