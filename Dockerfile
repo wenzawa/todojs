@@ -1,15 +1,14 @@
 FROM node:alpine
 
-WORKDIR  app/todo
+WORKDIR  usr/app/todo
+COPY .  /usr/app/todo/
 
-ADD /src /src
-
-COPY ./package.json .
-
-COPY ./webpack.config.js .
-
-RUN npm install -g
+RUN npm install
 
 COPY . .
+RUN npm build
 
-ENV PATH=$PATH:/app/todo/node_modules/.bin
+ENV PATH=$PATH:/usr/app/todo/node_modules/.bin
+ENV NODE_ENV=development
+
+CMD ["npm start"]
